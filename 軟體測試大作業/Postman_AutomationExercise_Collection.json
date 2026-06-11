@@ -220,9 +220,9 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// 使用固定測試帳號",
-              "pm.environment.set('userName', 'WjcS0418');",
-              "pm.environment.set('userEmail', 'S25010418@gmail.com');",
+              "// 使用固定測試帳號（地址：台北）",
+              "pm.environment.set('userName', 'WjcS25010418');",
+              "pm.environment.set('userEmail', 'wjcS25010418@gmail.com');",
               "pm.environment.set('userPassword', 'WjcS0418');"
             ]
           }
@@ -287,31 +287,31 @@
             },
             {
               "key": "address1",
-              "value": "123 Test Street"
+              "value": "No.1, Zhongxiao East Road, Taipei"
             },
             {
               "key": "address2",
-              "value": "Suite 1"
+              "value": "Section 1"
             },
             {
               "key": "country",
-              "value": "United States"
+              "value": "Taiwan"
             },
             {
               "key": "zipcode",
-              "value": "12345"
+              "value": "100"
             },
             {
               "key": "state",
-              "value": "California"
+              "value": "Taiwan"
             },
             {
               "key": "city",
-              "value": "Los Angeles"
+              "value": "Taipei"
             },
             {
               "key": "mobile_number",
-              "value": "1234567890"
+              "value": "0912345678"
             }
           ]
         },
@@ -505,7 +505,7 @@
           "urlencoded": [
             {
               "key": "name",
-              "value": "{{userName}} Updated"
+              "value": "{{userName}}"
             },
             {
               "key": "email",
@@ -545,27 +545,27 @@
             },
             {
               "key": "address1",
-              "value": "456 New Street"
+              "value": "No.100, Xinyi Road, Taipei"
             },
             {
               "key": "address2",
-              "value": "Suite 2"
+              "value": "Section 5"
             },
             {
               "key": "country",
-              "value": "United States"
+              "value": "Taiwan"
             },
             {
               "key": "zipcode",
-              "value": "54321"
+              "value": "110"
             },
             {
               "key": "state",
-              "value": "Nevada"
+              "value": "Taiwan"
             },
             {
               "key": "city",
-              "value": "Las Vegas"
+              "value": "Taipei"
             },
             {
               "key": "mobile_number",
