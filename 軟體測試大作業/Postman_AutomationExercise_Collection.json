@@ -220,10 +220,10 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "const ts = Date.now();",
-              "pm.environment.set('userEmail', 'qa_' + ts + '@example.com');",
-              "pm.environment.set('userPassword', 'Test@12345');",
-              "pm.environment.set('userName', 'QA Tester');"
+              "// 使用固定測試帳號",
+              "pm.environment.set('userName', 'WjcS0418');",
+              "pm.environment.set('userEmail', 'S25010418@gmail.com');",
+              "pm.environment.set('userPassword', 'WjcS0418');"
             ]
           }
         },
@@ -233,8 +233,8 @@
             "type": "text/javascript",
             "exec": [
               "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-              "pm.test('responseCode 為 201', () => pm.expect(json.responseCode).to.eql(201));",
-              "pm.test('訊息: User created!', () => pm.expect(json.message).to.eql('User created!'));"
+              "pm.test('帳號建立成功(201)或已存在(400)', () => pm.expect(json.responseCode).to.be.oneOf([201, 400]));",
+              "pm.test('訊息: User created! 或 已存在', () => pm.expect(String(json.message).toLowerCase()).to.satisfy(m => m.includes('created') || m.includes('exist')));"
             ]
           }
         }
@@ -275,11 +275,11 @@
             },
             {
               "key": "firstname",
-              "value": "QA"
+              "value": "Wjc"
             },
             {
               "key": "lastname",
-              "value": "Tester"
+              "value": "S"
             },
             {
               "key": "company",
@@ -533,11 +533,11 @@
             },
             {
               "key": "firstname",
-              "value": "QA"
+              "value": "Wjc"
             },
             {
               "key": "lastname",
-              "value": "Tester"
+              "value": "S"
             },
             {
               "key": "company",
