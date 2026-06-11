@@ -1,0 +1,669 @@
+{
+  "info": {
+    "name": "ButomationExercise API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Automation Exercise 公开 14 支 API 测试集合（简体中文版）。账号生命周期使用固定账号 wjc25S010418@gmail.com（地址：北京）。请选择环境 ButomationExercise Env 后用 Collection Runner 一次跑完并截图。API 一律返回 HTTP 200，真正状态码在响应 JSON 的 responseCode 字段。"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://automationexercise.com"
+    }
+  ],
+  "item": [
+    {
+      "name": "API 1 - 获取所有商品清单 (GET productsList)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('响应含 products 数组', () => pm.expect(json.products).to.be.an('array'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/productsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productsList"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 2 - POST 商品清单 (不支持, 405)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 405', () => pm.expect(json.responseCode).to.eql(405));",
+              "pm.test('消息: 不支持此方法', () => pm.expect(json.message).to.include('not supported'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/productsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productsList"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 3 - 获取所有品牌清单 (GET brandsList)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('响应含 brands 数组', () => pm.expect(json.brands).to.be.an('array'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/brandsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "brandsList"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 4 - PUT 品牌清单 (不支持, 405)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 405', () => pm.expect(json.responseCode).to.eql(405));",
+              "pm.test('消息: 不支持此方法', () => pm.expect(json.message).to.include('not supported'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/brandsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "brandsList"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 5 - 搜索商品 (有效, 200)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('响应含 products 搜索结果', () => pm.expect(json.products).to.be.an('array'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "search_product",
+              "value": "top"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/searchProduct",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "searchProduct"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 6 - 搜索商品 (缺少参数, 400)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 400', () => pm.expect(json.responseCode).to.eql(400));",
+              "pm.test('消息: 缺少 search_product 參數', () => pm.expect(json.message).to.include('search_product parameter is missing'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/searchProduct",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "searchProduct"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 11 - 创建用户账号 (201)",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 使用固定测试账号（地址：北京）",
+              "pm.environment.set('userName', 'Wjc25S010418');",
+              "pm.environment.set('userEmail', 'wjc25S010418@gmail.com');",
+              "pm.environment.set('userPassword', 'Wjc25S0418');"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('账号创建成功(201)或已存在(400)', () => pm.expect(json.responseCode).to.be.oneOf([201, 400]));",
+              "pm.test('消息: User created! 或 已存在', () => pm.expect(String(json.message).toLowerCase()).to.satisfy(m => m.includes('created') || m.includes('exist')));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "{{userName}}"
+            },
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            },
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            },
+            {
+              "key": "title",
+              "value": "Mr"
+            },
+            {
+              "key": "birth_date",
+              "value": "10"
+            },
+            {
+              "key": "birth_month",
+              "value": "May"
+            },
+            {
+              "key": "birth_year",
+              "value": "1995"
+            },
+            {
+              "key": "firstname",
+              "value": "Wjc"
+            },
+            {
+              "key": "lastname",
+              "value": "S"
+            },
+            {
+              "key": "company",
+              "value": "TestCo"
+            },
+            {
+              "key": "address1",
+              "value": "No.1, Chang'an Avenue, Dongcheng District, Beijing"
+            },
+            {
+              "key": "address2",
+              "value": "Building A"
+            },
+            {
+              "key": "country",
+              "value": "China"
+            },
+            {
+              "key": "zipcode",
+              "value": "100000"
+            },
+            {
+              "key": "state",
+              "value": "Beijing"
+            },
+            {
+              "key": "city",
+              "value": "Beijing"
+            },
+            {
+              "key": "mobile_number",
+              "value": "13800138000"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/createAccount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "createAccount"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 7 - 验证登录 (有效, 200)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('消息: User exists!', () => pm.expect(json.message).to.eql('User exists!'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            },
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 8 - 验证登录 (缺少 email, 400)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 400', () => pm.expect(json.responseCode).to.eql(400));",
+              "pm.test('消息: 缺少 email 或 password 參數', () => pm.expect(json.message).to.include('email or password parameter is missing'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 9 - 验证登录 DELETE (不支持, 405)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 405', () => pm.expect(json.responseCode).to.eql(405));",
+              "pm.test('消息: 不支持此方法', () => pm.expect(json.message).to.include('not supported'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 10 - 验证登录 (无效, 404)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 404', () => pm.expect(json.responseCode).to.eql(404));",
+              "pm.test('消息: User not found!', () => pm.expect(json.message).to.eql('User not found!'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "doesnotexist_unknown_999@example.com"
+            },
+            {
+              "key": "password",
+              "value": "wrongpassword"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 13 - 更新用户账号 (200)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('消息: User updated!', () => pm.expect(json.message).to.eql('User updated!'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "{{userName}}"
+            },
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            },
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            },
+            {
+              "key": "title",
+              "value": "Mr"
+            },
+            {
+              "key": "birth_date",
+              "value": "11"
+            },
+            {
+              "key": "birth_month",
+              "value": "June"
+            },
+            {
+              "key": "birth_year",
+              "value": "1996"
+            },
+            {
+              "key": "firstname",
+              "value": "Wjc"
+            },
+            {
+              "key": "lastname",
+              "value": "S"
+            },
+            {
+              "key": "company",
+              "value": "TestCo"
+            },
+            {
+              "key": "address1",
+              "value": "No.100, Wangfujing Street, Beijing"
+            },
+            {
+              "key": "address2",
+              "value": "Floor 5"
+            },
+            {
+              "key": "country",
+              "value": "China"
+            },
+            {
+              "key": "zipcode",
+              "value": "100006"
+            },
+            {
+              "key": "state",
+              "value": "Beijing"
+            },
+            {
+              "key": "city",
+              "value": "Beijing"
+            },
+            {
+              "key": "mobile_number",
+              "value": "13900139000"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/updateAccount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "updateAccount"
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 14 - 以 Email 获取账号明细 (200)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('响应含 user 物件', () => pm.expect(json.user).to.be.an('object'));",
+              "pm.test('email 與建立帳號相符', () => pm.expect(json.user.email).to.eql(pm.environment.get('userEmail')));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/getUserDetailByEmail?email={{userEmail}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "getUserDetailByEmail"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "API 12 - 删除用户账号 (200)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 为 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('消息: Account deleted!', () => pm.expect(json.message).to.eql('Account deleted!'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            },
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/deleteAccount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "deleteAccount"
+          ]
+        }
+      }
+    }
+  ]
+}
