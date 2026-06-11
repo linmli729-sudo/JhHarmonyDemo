@@ -5,190 +5,665 @@
     "description": "Automation Exercise 公開 14 支 API 測試集合（軟體測試大作業 3.2）。匯入後請建立/選擇環境變數 baseUrl=https://automationexercise.com，再用 Collection Runner 一次跑完並截圖。備註：API 一律回 HTTP 200，真正狀態碼在回應 JSON 的 responseCode 欄位，故斷言驗證 body.responseCode 與 message。"
   },
   "variable": [
-    { "key": "baseUrl", "value": "https://automationexercise.com" }
+    {
+      "key": "baseUrl",
+      "value": "https://automationexercise.com"
+    }
   ],
   "item": [
     {
       "name": "API 1 - 取得所有商品清單 (GET productsList)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
-        "pm.test('回應含 products 陣列', () => pm.expect(json.products).to.be.an('array'));"
-      ] } }],
-      "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/productsList" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('回應含 products 陣列', () => pm.expect(json.products).to.be.an('array'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/productsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productsList"
+          ]
+        }
+      }
     },
     {
       "name": "API 2 - POST 商品清單 (不支援, 405)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 405', () => pm.expect(json.responseCode).to.eql(405));",
-        "pm.test('訊息: 不支援此方法', () => pm.expect(json.message).to.include('not supported'));"
-      ] } }],
-      "request": { "method": "POST", "header": [], "body": { "mode": "urlencoded", "urlencoded": [] }, "url": { "raw": "{{baseUrl}}/api/productsList" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 405', () => pm.expect(json.responseCode).to.eql(405));",
+              "pm.test('訊息: 不支援此方法', () => pm.expect(json.message).to.include('not supported'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/productsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productsList"
+          ]
+        }
+      }
     },
     {
       "name": "API 3 - 取得所有品牌清單 (GET brandsList)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
-        "pm.test('回應含 brands 陣列', () => pm.expect(json.brands).to.be.an('array'));"
-      ] } }],
-      "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/brandsList" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('回應含 brands 陣列', () => pm.expect(json.brands).to.be.an('array'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/brandsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "brandsList"
+          ]
+        }
+      }
     },
     {
       "name": "API 4 - PUT 品牌清單 (不支援, 405)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 405', () => pm.expect(json.responseCode).to.eql(405));",
-        "pm.test('訊息: 不支援此方法', () => pm.expect(json.message).to.include('not supported'));"
-      ] } }],
-      "request": { "method": "PUT", "header": [], "body": { "mode": "urlencoded", "urlencoded": [] }, "url": { "raw": "{{baseUrl}}/api/brandsList" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 405', () => pm.expect(json.responseCode).to.eql(405));",
+              "pm.test('訊息: 不支援此方法', () => pm.expect(json.message).to.include('not supported'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/brandsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "brandsList"
+          ]
+        }
+      }
     },
     {
       "name": "API 5 - 搜尋商品 (有效, 200)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
-        "pm.test('回應含 products 搜尋結果', () => pm.expect(json.products).to.be.an('array'));"
-      ] } }],
-      "request": { "method": "POST", "header": [], "body": { "mode": "urlencoded", "urlencoded": [{ "key": "search_product", "value": "top" }] }, "url": { "raw": "{{baseUrl}}/api/searchProduct" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('回應含 products 搜尋結果', () => pm.expect(json.products).to.be.an('array'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "search_product",
+              "value": "top"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/searchProduct",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "searchProduct"
+          ]
+        }
+      }
     },
     {
       "name": "API 6 - 搜尋商品 (缺少參數, 400)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 400', () => pm.expect(json.responseCode).to.eql(400));",
-        "pm.test('訊息: 缺少 search_product 參數', () => pm.expect(json.message).to.include('search_product parameter is missing'));"
-      ] } }],
-      "request": { "method": "POST", "header": [], "body": { "mode": "urlencoded", "urlencoded": [] }, "url": { "raw": "{{baseUrl}}/api/searchProduct" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 400', () => pm.expect(json.responseCode).to.eql(400));",
+              "pm.test('訊息: 缺少 search_product 參數', () => pm.expect(json.message).to.include('search_product parameter is missing'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/searchProduct",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "searchProduct"
+          ]
+        }
+      }
     },
     {
       "name": "API 11 - 建立使用者帳號 (201)",
       "event": [
-        { "listen": "prerequest", "script": { "type": "text/javascript", "exec": [
-          "const ts = Date.now();",
-          "pm.environment.set('userEmail', 'qa_' + ts + '@example.com');",
-          "pm.environment.set('userPassword', 'Test@12345');",
-          "pm.environment.set('userName', 'QA Tester');"
-        ] } },
-        { "listen": "test", "script": { "type": "text/javascript", "exec": [
-          "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-          "pm.test('responseCode 為 201', () => pm.expect(json.responseCode).to.eql(201));",
-          "pm.test('訊息: User created!', () => pm.expect(json.message).to.eql('User created!'));"
-        ] } }
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const ts = Date.now();",
+              "pm.environment.set('userEmail', 'qa_' + ts + '@example.com');",
+              "pm.environment.set('userPassword', 'Test@12345');",
+              "pm.environment.set('userName', 'QA Tester');"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 201', () => pm.expect(json.responseCode).to.eql(201));",
+              "pm.test('訊息: User created!', () => pm.expect(json.message).to.eql('User created!'));"
+            ]
+          }
+        }
       ],
-      "request": { "method": "POST", "header": [], "body": { "mode": "urlencoded", "urlencoded": [
-        { "key": "name", "value": "{{userName}}" },
-        { "key": "email", "value": "{{userEmail}}" },
-        { "key": "password", "value": "{{userPassword}}" },
-        { "key": "title", "value": "Mr" },
-        { "key": "birth_date", "value": "10" },
-        { "key": "birth_month", "value": "May" },
-        { "key": "birth_year", "value": "1995" },
-        { "key": "firstname", "value": "QA" },
-        { "key": "lastname", "value": "Tester" },
-        { "key": "company", "value": "TestCo" },
-        { "key": "address1", "value": "123 Test Street" },
-        { "key": "address2", "value": "Suite 1" },
-        { "key": "country", "value": "United States" },
-        { "key": "zipcode", "value": "12345" },
-        { "key": "state", "value": "California" },
-        { "key": "city", "value": "Los Angeles" },
-        { "key": "mobile_number", "value": "1234567890" }
-      ] }, "url": { "raw": "{{baseUrl}}/api/createAccount" } }
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "{{userName}}"
+            },
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            },
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            },
+            {
+              "key": "title",
+              "value": "Mr"
+            },
+            {
+              "key": "birth_date",
+              "value": "10"
+            },
+            {
+              "key": "birth_month",
+              "value": "May"
+            },
+            {
+              "key": "birth_year",
+              "value": "1995"
+            },
+            {
+              "key": "firstname",
+              "value": "QA"
+            },
+            {
+              "key": "lastname",
+              "value": "Tester"
+            },
+            {
+              "key": "company",
+              "value": "TestCo"
+            },
+            {
+              "key": "address1",
+              "value": "123 Test Street"
+            },
+            {
+              "key": "address2",
+              "value": "Suite 1"
+            },
+            {
+              "key": "country",
+              "value": "United States"
+            },
+            {
+              "key": "zipcode",
+              "value": "12345"
+            },
+            {
+              "key": "state",
+              "value": "California"
+            },
+            {
+              "key": "city",
+              "value": "Los Angeles"
+            },
+            {
+              "key": "mobile_number",
+              "value": "1234567890"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/createAccount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "createAccount"
+          ]
+        }
+      }
     },
     {
       "name": "API 7 - 驗證登入 (有效, 200)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
-        "pm.test('訊息: User exists!', () => pm.expect(json.message).to.eql('User exists!'));"
-      ] } }],
-      "request": { "method": "POST", "header": [], "body": { "mode": "urlencoded", "urlencoded": [
-        { "key": "email", "value": "{{userEmail}}" },
-        { "key": "password", "value": "{{userPassword}}" }
-      ] }, "url": { "raw": "{{baseUrl}}/api/verifyLogin" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('訊息: User exists!', () => pm.expect(json.message).to.eql('User exists!'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            },
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ]
+        }
+      }
     },
     {
       "name": "API 8 - 驗證登入 (缺少 email, 400)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 400', () => pm.expect(json.responseCode).to.eql(400));",
-        "pm.test('訊息: 缺少 email 或 password 參數', () => pm.expect(json.message).to.include('email or password parameter is missing'));"
-      ] } }],
-      "request": { "method": "POST", "header": [], "body": { "mode": "urlencoded", "urlencoded": [
-        { "key": "password", "value": "{{userPassword}}" }
-      ] }, "url": { "raw": "{{baseUrl}}/api/verifyLogin" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 400', () => pm.expect(json.responseCode).to.eql(400));",
+              "pm.test('訊息: 缺少 email 或 password 參數', () => pm.expect(json.message).to.include('email or password parameter is missing'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ]
+        }
+      }
     },
     {
       "name": "API 9 - 驗證登入 DELETE (不支援, 405)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 405', () => pm.expect(json.responseCode).to.eql(405));",
-        "pm.test('訊息: 不支援此方法', () => pm.expect(json.message).to.include('not supported'));"
-      ] } }],
-      "request": { "method": "DELETE", "header": [], "url": { "raw": "{{baseUrl}}/api/verifyLogin" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 405', () => pm.expect(json.responseCode).to.eql(405));",
+              "pm.test('訊息: 不支援此方法', () => pm.expect(json.message).to.include('not supported'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ]
+        }
+      }
     },
     {
       "name": "API 10 - 驗證登入 (無效, 404)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 404', () => pm.expect(json.responseCode).to.eql(404));",
-        "pm.test('訊息: User not found!', () => pm.expect(json.message).to.eql('User not found!'));"
-      ] } }],
-      "request": { "method": "POST", "header": [], "body": { "mode": "urlencoded", "urlencoded": [
-        { "key": "email", "value": "doesnotexist_unknown_999@example.com" },
-        { "key": "password", "value": "wrongpassword" }
-      ] }, "url": { "raw": "{{baseUrl}}/api/verifyLogin" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 404', () => pm.expect(json.responseCode).to.eql(404));",
+              "pm.test('訊息: User not found!', () => pm.expect(json.message).to.eql('User not found!'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "doesnotexist_unknown_999@example.com"
+            },
+            {
+              "key": "password",
+              "value": "wrongpassword"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ]
+        }
+      }
     },
     {
       "name": "API 13 - 更新使用者帳號 (200)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
-        "pm.test('訊息: User updated!', () => pm.expect(json.message).to.eql('User updated!'));"
-      ] } }],
-      "request": { "method": "PUT", "header": [], "body": { "mode": "urlencoded", "urlencoded": [
-        { "key": "name", "value": "{{userName}} Updated" },
-        { "key": "email", "value": "{{userEmail}}" },
-        { "key": "password", "value": "{{userPassword}}" },
-        { "key": "title", "value": "Mr" },
-        { "key": "birth_date", "value": "11" },
-        { "key": "birth_month", "value": "June" },
-        { "key": "birth_year", "value": "1996" },
-        { "key": "firstname", "value": "QA" },
-        { "key": "lastname", "value": "Tester" },
-        { "key": "company", "value": "TestCo" },
-        { "key": "address1", "value": "456 New Street" },
-        { "key": "address2", "value": "Suite 2" },
-        { "key": "country", "value": "United States" },
-        { "key": "zipcode", "value": "54321" },
-        { "key": "state", "value": "Nevada" },
-        { "key": "city", "value": "Las Vegas" },
-        { "key": "mobile_number", "value": "0987654321" }
-      ] }, "url": { "raw": "{{baseUrl}}/api/updateAccount" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('訊息: User updated!', () => pm.expect(json.message).to.eql('User updated!'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "{{userName}} Updated"
+            },
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            },
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            },
+            {
+              "key": "title",
+              "value": "Mr"
+            },
+            {
+              "key": "birth_date",
+              "value": "11"
+            },
+            {
+              "key": "birth_month",
+              "value": "June"
+            },
+            {
+              "key": "birth_year",
+              "value": "1996"
+            },
+            {
+              "key": "firstname",
+              "value": "QA"
+            },
+            {
+              "key": "lastname",
+              "value": "Tester"
+            },
+            {
+              "key": "company",
+              "value": "TestCo"
+            },
+            {
+              "key": "address1",
+              "value": "456 New Street"
+            },
+            {
+              "key": "address2",
+              "value": "Suite 2"
+            },
+            {
+              "key": "country",
+              "value": "United States"
+            },
+            {
+              "key": "zipcode",
+              "value": "54321"
+            },
+            {
+              "key": "state",
+              "value": "Nevada"
+            },
+            {
+              "key": "city",
+              "value": "Las Vegas"
+            },
+            {
+              "key": "mobile_number",
+              "value": "0987654321"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/updateAccount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "updateAccount"
+          ]
+        }
+      }
     },
     {
       "name": "API 14 - 以 Email 取得帳號明細 (200)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
-        "pm.test('回應含 user 物件', () => pm.expect(json.user).to.be.an('object'));",
-        "pm.test('email 與建立帳號相符', () => pm.expect(json.user.email).to.eql(pm.environment.get('userEmail')));"
-      ] } }],
-      "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/getUserDetailByEmail?email={{userEmail}}" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('回應含 user 物件', () => pm.expect(json.user).to.be.an('object'));",
+              "pm.test('email 與建立帳號相符', () => pm.expect(json.user.email).to.eql(pm.environment.get('userEmail')));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/getUserDetailByEmail?email={{userEmail}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "getUserDetailByEmail"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            }
+          ]
+        }
+      }
     },
     {
       "name": "API 12 - 刪除使用者帳號 (200)",
-      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-        "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
-        "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
-        "pm.test('訊息: Account deleted!', () => pm.expect(json.message).to.eql('Account deleted!'));"
-      ] } }],
-      "request": { "method": "DELETE", "header": [], "body": { "mode": "urlencoded", "urlencoded": [
-        { "key": "email", "value": "{{userEmail}}" },
-        { "key": "password", "value": "{{userPassword}}" }
-      ] }, "url": { "raw": "{{baseUrl}}/api/deleteAccount" } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json; try { json = pm.response.json(); } catch(e) { json = {}; }",
+              "pm.test('responseCode 為 200', () => pm.expect(json.responseCode).to.eql(200));",
+              "pm.test('訊息: Account deleted!', () => pm.expect(json.message).to.eql('Account deleted!'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "{{userEmail}}"
+            },
+            {
+              "key": "password",
+              "value": "{{userPassword}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/deleteAccount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "deleteAccount"
+          ]
+        }
+      }
     }
   ]
 }
