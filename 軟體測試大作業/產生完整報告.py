@@ -264,6 +264,22 @@ def build():
         ["S4 高度併發", "POST /searchProduct", "100", "15", "5"],
         ["S5 持續壓力", "GET /productsList", "30", "10", "20"],
     ], widths=[3.4, 3.6, 2, 2.6, 2.4])
+    body(doc, "Test Plan 結構與操作步驟：")
+    body(doc, "（1）新增 Thread Group（執行緒群組），依表3-3 設定執行緒數、Ramp-up 時間與迴圈次數，並將 Action on Sampler Error 設為 Continue。", indent=False, size=11)
+    body(doc, "（2）於各群組下新增 HTTP Request，設定值如表3-4。", indent=False, size=11)
+    body(doc, "（3）於 Test Plan 加入三個 Listener：Aggregate Report、Summary Report、View Results Tree。", indent=False, size=11)
+    body(doc, "（4）勾選 Test Plan 的「Run Thread Groups consecutively」使 5 場景依序執行。", indent=False, size=11)
+    body(doc, "（5）按掃帚 Clear All 清空舊數據後，按綠色 ▶ Start 執行；完成後於 Aggregate Report 讀取 Average、Throughput、Error% 並截圖。", indent=False, size=11)
+    caption(doc, "表3-4　HTTP Request 設定值")
+    make_table(doc, ["欄位", "GET 類（S1/S2/S5）", "POST 類（S3/S4）"], [
+        ["Protocol", "https", "https"],
+        ["Server Name or IP", "automationexercise.com", "automationexercise.com"],
+        ["HTTP Method", "GET", "POST"],
+        ["Path", "/api/productsList", "/api/searchProduct"],
+        ["Parameters", "（無）", "search_product = top"],
+    ], widths=[3.6, 5.2, 5.2], body_size=9.5, header_size=10)
+    body(doc, "亦可用命令列非 GUI 模式執行並自動產出 HTML 圖文報告：", indent=False, size=11)
+    body(doc, "jmeter -n -t AutomationExercise_效能測試.jmx -l result.jtl -e -o report_html", indent=False, size=10)
     body(doc, "〔請貼上：圖3-2 JMeter Aggregate Report 截圖〕", red=True)
     caption(doc, "圖3-2　JMeter 彙總報告", above=False)
 
